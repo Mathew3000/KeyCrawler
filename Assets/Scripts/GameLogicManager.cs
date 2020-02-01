@@ -50,6 +50,7 @@ namespace KeyCrawler
         public EffectTypes ItemFoundEffect;
         public EffectTypes PlayerDeathEffect;
         public EffectTypes ShootEffect;
+        public EffectTypes FallingEffect;
         #endregion
 
         #region PrivateMember
@@ -60,6 +61,9 @@ namespace KeyCrawler
 
         void Start()
         {
+            // Make sure GO is persistent
+            DontDestroyOnLoad(gameObject);
+
             // Find references
             localPlayer = FindObjectOfType<Player>();
             localKeyboard = FindObjectOfType<Keyboard>();
@@ -91,7 +95,7 @@ namespace KeyCrawler
 
         #region PublicMember
         /// <summary>
-        /// Called from the player when found a KeyItem
+        /// found a KeyItem
         /// </summary>
         /// <param name="keyFunction">the keytype</param>
         public void KeyFound(KeyFunction keyFunction)
@@ -101,7 +105,7 @@ namespace KeyCrawler
         }
 
         /// <summary>
-        /// Called from the player when found a key with a weapon
+        /// found a key with a weapon
         /// </summary>
         /// <param name="keyFunction"></param>
         public void WeaponFound(KeyFunction keyFunction)
@@ -110,19 +114,31 @@ namespace KeyCrawler
         }
 
         /// <summary>
-        /// Called from the player when found a weapon
+        /// found a weapon
         /// </summary>
         public void WeaponFound()
         {
             PlayEffect(ItemFoundEffect);
         }
 
-        /// <summary>
-        /// Called from the player to signalise the firing of a weapon
-        /// </summary>
         public void TriggerShot()
         {
             PlayEffect(ShootEffect);
+        }
+
+        public void TriggerFallingSound()
+        {
+            PlayEffect(FallingEffect);
+        }
+
+        public void TriggerDeathEffect()
+        {
+            PlayEffect(EffectTypes.death);
+        }
+        
+        public void PlayerDied()
+        {
+            Debug.LogError("Missing Function GameLogicManager.PlayerDied()");
         }
         #endregion
 
