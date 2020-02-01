@@ -6,35 +6,39 @@ namespace KeyCrawler
 {
     public interface IPlayerLife
     {
-        void AddHP();
+        void AddHP(float value);
 
         void DoDamage();
 
-        float GetLive();
+        float GetLife();
     }
 
-    public interface IItem
-    {
-
-    }
-
-
-    public class Player : MonoBehaviour, IPlayerLife
+    public class Player : MonoBehaviour
     {
         #region EditorSettings
-        
+        public float baseDmg = 1.0f;
         #endregion
 
-        // Start is called before the first frame update
+        #region Properties
+        public float PlayerLife { get; private set; }
+        #endregion
+
         void Start()
         {
 
         }
 
-        // Update is called once per frame
         void Update()
+        {
+            // Player Movement
+
+        }
+
+        #region InterfaceMember
+        public void AddHp()
         {
 
         }
+        #endregion
     }
 }
