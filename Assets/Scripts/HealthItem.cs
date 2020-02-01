@@ -11,6 +11,7 @@ namespace KeyCrawler
         private void Start()
         {
             Kind = itemKind.health;
+            Value = HealthValue;
         }
     }
 }

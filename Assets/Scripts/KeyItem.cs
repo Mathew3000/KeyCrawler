@@ -16,11 +16,12 @@ namespace KeyCrawler
 
     public class KeyItem : Item
     {
-        public string KeyFunction;
+        public KeyFunction KeyFunction;
 
         private void Start()
         {
             Kind = itemKind.key;
+            Value = KeyFunction;
         }
     }
 }

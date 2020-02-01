@@ -11,11 +11,13 @@ namespace KeyCrawler
 
     public class UpgradeItem : Item
     {
+        public KeyFunction KeyFunction;
         public UpgradeKind upgradeKind;
 
         private void Start()
         {
             Kind = itemKind.upgrade;
+            Value = KeyFunction;
         }
 
     }
