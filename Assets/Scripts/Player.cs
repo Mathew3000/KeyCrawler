@@ -18,8 +18,7 @@ namespace KeyCrawler
         crawlingOneWay,
         crawlingTwoWay,
         crawlingAll,
-        walkingAll,
-        complete
+        walkingAll
     }
 
     public enum PlayerDirection
@@ -111,7 +110,8 @@ namespace KeyCrawler
             #region Debug
             if(CanDoEverything)
             {
-                CurrentStage = PlayerStage.complete;
+                CurrentStage = PlayerStage.walkingAll;
+                CanShoot = true;
             }
             #endregion
 
@@ -156,7 +156,7 @@ namespace KeyCrawler
             charController.Move(movementVector * Time.deltaTime);
 
             // Shoot If possible
-            if(CurrentStage >= PlayerStage.complete)
+            if(CanShoot)
             {
                 if(Input.GetButtonDown("Fire1"))
                 {
@@ -280,7 +280,7 @@ namespace KeyCrawler
                 case itemKind.weapon:
                     try
                     {
-                        Debug.LogWarning("Player.HandleItem: Weapon Not handled yet");
+                        CanShoot = true;
                     }
                     catch
                     {
@@ -324,7 +324,7 @@ namespace KeyCrawler
         /// </summary>
         private void LevelUp()
         {
-            if (CurrentStage != PlayerStage.complete)
+            if (CurrentStage != PlayerStage.walkingAll)
             {
                 CurrentStage++;
             }
