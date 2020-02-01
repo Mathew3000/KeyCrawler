@@ -8,6 +8,7 @@ namespace KeyCrawler
     public interface IKeyboard
     {
         void AddKey(KeyFunction key);
+        void looseAllKeys();
     }
 
     public class Keyboard: MonoBehaviour, IKeyboard
