@@ -18,6 +18,8 @@ namespace KeyCrawler
         const float SideMove = 5;
         const float TopMove = 3;
 
+        GameLogicManager gameLogicManager;
+
         Vector3 CamMove;
         Vector3 PlayerMove;
 
@@ -26,6 +28,7 @@ namespace KeyCrawler
         private void Start()
         {
             CloseDoor();
+            gameLogicManager = GameObject.Find("GameLogicManager").GetComponent<GameLogicManager>();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -58,7 +61,13 @@ namespace KeyCrawler
             }
         }
 
-
+        private void Update()
+        {
+            if (gameLogicManager.IsClear && !DoorCloseBlock.isTrigger)
+            {
+                OpenDoor();
+            }
+        }
 
         void CloseDoor()
         {
@@ -70,8 +79,6 @@ namespace KeyCrawler
             DoorCloseBlock.isTrigger = true;
         }
 
-        //TODO Logic for Opening Dors
-        //TODO Add Enemy Count to GameLogic Maybe Event
 
 
     }

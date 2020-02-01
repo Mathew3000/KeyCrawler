@@ -21,7 +21,7 @@ namespace KeyCrawler
             if (other.GetComponent<Player>())
             {
                 if (bIsOpen) {
-                    //other.GetComponent<Player>().FALLINHOLE;
+                    other.GetComponent<Player>().FallToDeath();
                 }
                 else
                 {

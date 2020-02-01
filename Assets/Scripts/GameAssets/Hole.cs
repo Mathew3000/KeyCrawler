@@ -12,7 +12,7 @@ namespace KeyCrawler
         {
             if (other.GetComponent<Player>())
             {
-                //other.GetComponent<Player>().FALLINHOLE;
+                other.GetComponent<Player>().FallToDeath();
             }
         }
     }
