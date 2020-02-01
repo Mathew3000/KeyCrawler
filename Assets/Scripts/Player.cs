@@ -22,6 +22,14 @@ namespace KeyCrawler
         complete
     }
 
+    public enum PlayerDirection
+    {
+        up,
+        down,
+        left,
+        right
+    }
+
     public class Player : MonoBehaviour, IPlayerLife
     {
         #region EditorSettings
@@ -37,7 +45,13 @@ namespace KeyCrawler
         public float baseSpeed = 5.0f;
         [Tooltip("How much jumppower the player has")]
         public float baseJumpPower = 8.0f;
-
+        [Header("Shooting")]
+        [Tooltip("SpawnPosition for projectile")]
+        public Transform projectileSpawn;
+        [Tooltip("Projectile prefab")]
+        public GameObject projectilePrefab;
+        [Tooltip("Projectile speed")]
+        public float projectileSpeed = 5.0f;
         #endregion
 
         #region Debug
@@ -52,22 +66,30 @@ namespace KeyCrawler
         public float CurrentJumpPower { get; private set; }
 
         public PlayerStage CurrentStage { get; private set; }
+        public PlayerDirection CurrentDirection { get; private set; }
         #endregion
 
         #region PrivateVariables
 
         private float currentHpMax = 100.0f;
 
+        private bool CanShoot = false;
+
         // References
         CharacterController charController;
+        Keyboard keyBoard;
 
         private Vector3 movementVector = Vector3.zero;
         #endregion
 
         void Start()
         {
+            // Set Fixed
+            DontDestroyOnLoad(gameObject);
+
             // Find references
             charController = gameObject.GetComponent<CharacterController>();
+            keyBoard = FindObjectOfType<Keyboard>();
             
             // Load settings
             currentHpMax = baseHP;
@@ -76,6 +98,7 @@ namespace KeyCrawler
             CurrentSpeed = baseSpeed;
             CurrentStage = PlayerStage.crawlingOneWay;
             CurrentJumpPower = baseJumpPower;
+            CurrentDirection = PlayerDirection.right;
 
             if(!SanityCheck())
             {
@@ -131,6 +154,18 @@ namespace KeyCrawler
 
             // Apply Movement
             charController.Move(movementVector * Time.deltaTime);
+
+            // Shoot If possible
+            if(CurrentStage >= PlayerStage.complete)
+            {
+                if(Input.GetButtonDown("Fire1"))
+                {
+                    ShootProjectile();
+                }
+            }
+
+            // Map Movement
+            MapDirection(movementVector);
         }
 
         #region InterfaceMember
@@ -172,8 +207,116 @@ namespace KeyCrawler
             bool sane = true;
 
             sane &= (charController != null);
+            sane &= (keyBoard != null);
+            sane &= (projectileSpawn != null);
+            sane &= (projectilePrefab != null);
 
             return sane;
+        }
+
+        /// <summary>
+        /// Maps direction info
+        /// </summary>
+        /// <param name="dir">the direction to check</param>
+        private void MapDirection(Vector3 dir)
+        {
+            if (dir.x > 0)
+            {
+                CurrentDirection = PlayerDirection.right;
+            }
+            else if(dir.x < 0)
+            {
+                CurrentDirection = PlayerDirection.left;
+            }
+            if(dir.z > 0)
+            {
+                CurrentDirection = PlayerDirection.up;
+            }
+            else if(dir.z < 0)
+            {
+                CurrentDirection = PlayerDirection.down;
+            }
+        }
+
+        /// <summary>
+        /// Handles an item collision
+        /// </summary>
+        /// <param name="item">the item to handle</param>
+        private void HandleItem(Item item)
+        {
+            switch(item.getKind())
+            {
+                case itemKind.upgrade:
+                    LevelUp();
+                    try
+                    {
+                        keyBoard.AddKey((KeyFunction)item.getValue());
+                    }
+                    catch
+                    {
+                        Debug.LogError("Player.HandleItem: Item.getValue(): Unexpected Type: KeyFunction vs " + item.getValue().GetType().ToString());
+                    }
+                    break;
+                case itemKind.key:
+                    try
+                    {
+                        keyBoard.AddKey((KeyFunction)item.getValue());
+                    }
+                    catch
+                    {
+                        Debug.LogError("Player.HandleItem: Item.getValue(): Unexpected Type: KeyFunction vs " + item.getValue().GetType().ToString());
+                    }
+                    break;
+                case itemKind.health:
+                    try
+                    {
+                        AddHP((float)item.getValue());
+                    }
+                    catch
+                    {
+                        Debug.LogError("Player.HandleItem: Item.getValue(): Unexpected Type: float vs " + item.getValue().GetType().ToString());
+                    }
+                    break;
+                case itemKind.weapon:
+                    try
+                    {
+                        Debug.LogWarning("Player.HandleItem: Weapon Not handled yet");
+                    }
+                    catch
+                    {
+                        Debug.LogError("Player.HandleItem: Item.getValue(): Unexpected Type: weaponType vs " + item.getValue().GetType().ToString());
+                    }
+                    break;
+                default:
+                    Debug.LogWarning("Player.HandleItem: Unexpected itemKind received: " + item.getKind().ToString());
+                    break;
+            }
+
+            // When finished delete the item
+            item.Despawn();
+        }
+
+        private void ShootProjectile()
+        {
+            GameObject projectile = Instantiate(projectilePrefab, projectileSpawn.position, projectileSpawn.rotation);
+            Vector3 velocityVector = new Vector3();
+            switch (CurrentDirection)
+            {
+                case PlayerDirection.right:
+                    velocityVector = Vector3.right;
+                    break;
+                case PlayerDirection.left:
+                    velocityVector = Vector3.left;
+                    break;
+                case PlayerDirection.up:
+                    velocityVector = Vector3.forward;
+                    break;
+                case PlayerDirection.down:
+                    velocityVector = Vector3.back;
+                    break;
+
+            }
+            projectile.GetComponent<Rigidbody>().velocity = velocityVector * projectileSpeed;
         }
 
         /// <summary>
@@ -193,6 +336,16 @@ namespace KeyCrawler
         private void Die()
         {
             Debug.LogError("Missing Function Player.Die()");
+        }
+        #endregion
+
+        #region EventHandler
+        private void OnTriggerEnter(Collider other)
+        {
+            if(other.GetComponent<Item>() != null)
+            {
+                HandleItem(other.GetComponent<Item>());
+            }
         }
         #endregion
     }

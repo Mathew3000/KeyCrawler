@@ -13,6 +13,7 @@ namespace KeyCrawler
     public class Keyboard : MonoBehaviour, IKeyboard
     {
         private List<KeyFunction> enabledKeys = new List<KeyFunction>();
+
         // WIP: will probably change later!
         public object[] KeyboardImageAssets;
 
