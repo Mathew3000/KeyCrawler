@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace KeyCrawler
 {
@@ -56,11 +57,25 @@ namespace KeyCrawler
         public EffectTypes FallingEffect;
         #endregion
 
-        #region PrivateMember
+        #region Properties
+        public bool IsClear
+        {
+            get
+            {
+                Debug.LogError("Needs to be calculated");
+                return true;
+            }
+        }
+        #endregion
+
+        #region PrivateVariables
         // References
         private Player localPlayer;
         private Keyboard localKeyboard;
+        private int currentSceneIndex = 0;
         #endregion
+
+
 
         void Start()
         {
@@ -75,6 +90,9 @@ namespace KeyCrawler
             {
                 Debug.LogError("GameLocigManager SanityCheck failed!");
             }
+
+            // Register loaded Handler
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
         void Update()
@@ -109,13 +127,31 @@ namespace KeyCrawler
         /// </summary>
         public void StartGame()
         {
-            if(localPlayer == null)
+            // Init keyboard
+            localKeyboard.looseAllKeys();
+
+            LoadNextLevel();
+        }
+
+        /// <summary>
+        /// Restarts the curernt level
+        /// </summary>
+        public void ReloadLevel()
+        {
+            SceneManager.LoadSceneAsync(currentSceneIndex);
+        }
+
+        /// <summary>
+        /// Loads the next level
+        /// </summary>
+        public void LoadNextLevel()
+        {
+            //if (currentSceneIndex < (SceneManager.sceneCount - 1))
+            if (true)
             {
-                GameObject go = Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation);
-                localPlayer = go.GetComponent<Player>();
+                currentSceneIndex++;
+                SceneManager.LoadSceneAsync(currentSceneIndex);
             }
-            PlayBackground(localPlayer.CurrentStage);
-            Debug.LogError("GameLogicManager.StartGame() loading level missing");
         }
 
         /// <summary>
@@ -243,6 +279,20 @@ namespace KeyCrawler
             sane &= (localKeyboard != null);
 
             return sane;
+        }
+        #endregion
+
+        #region EventHandler
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            playerSpawnPoint = FindObjectOfType<PlayerSpawn>()?.transform;
+
+            if (localPlayer == null)
+            {
+                GameObject go = Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation);
+                localPlayer = go.GetComponent<Player>();
+                PlayBackground(localPlayer.CurrentStage);
+            }
         }
         #endregion
     }
