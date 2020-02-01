@@ -4,34 +4,42 @@ using UnityEngine;
 
 namespace KeyCrawler
 {
-    enum itemKind
+    public enum itemKind
     {
         key,
         health,
-        upgrade
+        upgrade,
+        weapon
     }
 
     public interface IItem<Item>
     {
-         string Kind { get; set; }
+        itemKind getKind();
+        AudioClip getSound();
     }
 
     public class Item : MonoBehaviour, IItem<Item>
     {
-        private itemKind kind;
+        #region Properties
+        internal itemKind Kind { get; set; }
+        internal AudioClip Sound;
+        #endregion
 
-        internal itemKind Kind { get => kind; set => kind = value; }
-
-        // Start is called before the first frame update
-        void Start()
+        #region Getter
+        public itemKind getKind()
         {
-
+            return Kind;
         }
 
-        // Update is called once per frame
-        void Update()
+        public AudioClip getSound()
         {
+            return Sound;
+        }
+        #endregion
 
+        public void Despawn()
+        {
+            Destroy(gameObject);
         }
     }
 }
