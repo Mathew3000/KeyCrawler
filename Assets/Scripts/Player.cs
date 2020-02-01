@@ -10,6 +10,8 @@ namespace KeyCrawler
 
         void DoDamage(float value);
 
+        void FallToDeath();
+
         float GetLife();
     }
 
@@ -18,8 +20,7 @@ namespace KeyCrawler
         crawlingOneWay,
         crawlingTwoWay,
         crawlingAll,
-        walkingAll,
-        complete
+        walkingAll
     }
 
     public enum PlayerDirection
@@ -52,6 +53,8 @@ namespace KeyCrawler
         public GameObject projectilePrefab;
         [Tooltip("Projectile speed")]
         public float projectileSpeed = 5.0f;
+        [Tooltip("Projectile cooldown")]
+        public float projectileCooldown = 0.5f;
         #endregion
 
         #region Debug
@@ -75,9 +78,10 @@ namespace KeyCrawler
 
         private bool CanShoot = false;
 
+        private float cooldownLeft = 0.0f;
         // References
         CharacterController charController;
-        Keyboard keyBoard;
+        GameLogicManager gameLogic;
 
         private Vector3 movementVector = Vector3.zero;
         #endregion
@@ -89,7 +93,7 @@ namespace KeyCrawler
 
             // Find references
             charController = gameObject.GetComponent<CharacterController>();
-            keyBoard = FindObjectOfType<Keyboard>();
+            gameLogic = FindObjectOfType<GameLogicManager>();
             
             // Load settings
             currentHpMax = baseHP;
@@ -111,9 +115,16 @@ namespace KeyCrawler
             #region Debug
             if(CanDoEverything)
             {
-                CurrentStage = PlayerStage.complete;
+                CurrentStage = PlayerStage.walkingAll;
+                CanShoot = true;
             }
             #endregion
+
+            // Decrease Cooldown
+            if(cooldownLeft > 0)
+            {
+                cooldownLeft -= Time.deltaTime;
+            }
 
             // Player Movement
             // depending on current stage
@@ -156,11 +167,12 @@ namespace KeyCrawler
             charController.Move(movementVector * Time.deltaTime);
 
             // Shoot If possible
-            if(CurrentStage >= PlayerStage.complete)
+            if(CanShoot)
             {
-                if(Input.GetButtonDown("Fire1"))
+                if(Input.GetButton("Fire1") && (cooldownLeft <= 0))
                 {
                     ShootProjectile();
+                    cooldownLeft = projectileCooldown;
                 }
             }
 
@@ -192,6 +204,12 @@ namespace KeyCrawler
             }
         }
         
+        public void FallToDeath()
+        {
+            gameLogic.TriggerFallingSound();
+            Die(true);
+        }
+
         public float GetLife()
         {
             return PlayerLife;
@@ -207,7 +225,7 @@ namespace KeyCrawler
             bool sane = true;
 
             sane &= (charController != null);
-            sane &= (keyBoard != null);
+            sane &= (gameLogic != null);
             sane &= (projectileSpawn != null);
             sane &= (projectilePrefab != null);
 
@@ -250,7 +268,7 @@ namespace KeyCrawler
                     LevelUp();
                     try
                     {
-                        keyBoard.AddKey((KeyFunction)item.getValue());
+                        gameLogic.KeyFound((KeyFunction)item.getValue());
                     }
                     catch
                     {
@@ -260,7 +278,7 @@ namespace KeyCrawler
                 case itemKind.key:
                     try
                     {
-                        keyBoard.AddKey((KeyFunction)item.getValue());
+                        gameLogic.KeyFound((KeyFunction)item.getValue());
                     }
                     catch
                     {
@@ -280,7 +298,8 @@ namespace KeyCrawler
                 case itemKind.weapon:
                     try
                     {
-                        Debug.LogWarning("Player.HandleItem: Weapon Not handled yet");
+                        CanShoot = true;
+                        gameLogic.WeaponFound();
                     }
                     catch
                     {
@@ -317,6 +336,8 @@ namespace KeyCrawler
 
             }
             projectile.GetComponent<Rigidbody>().velocity = velocityVector * projectileSpeed;
+
+            gameLogic.TriggerShot();
         }
 
         /// <summary>
@@ -324,18 +345,23 @@ namespace KeyCrawler
         /// </summary>
         private void LevelUp()
         {
-            if (CurrentStage != PlayerStage.complete)
+            if (CurrentStage != PlayerStage.walkingAll)
             {
                 CurrentStage++;
+                gameLogic.UpdateBackground();
             }
         }
 
         /// <summary>
         /// Kills the player
         /// </summary>
-        private void Die()
+        private void Die(bool silent = false)
         {
-            Debug.LogError("Missing Function Player.Die()");
+            if(!silent)
+            {
+                gameLogic.TriggerDeathEffect();
+            }
+            gameLogic.PlayerDied();
         }
         #endregion
 
