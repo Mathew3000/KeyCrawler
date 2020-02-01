@@ -23,11 +23,12 @@ namespace KeyCrawler
         public bool playEffect = false;
         public PlayerStage debugStage = PlayerStage.crawlingOneWay;
         public bool playBackground = false;
+        public bool startGame = false;
         #endregion
 
         #region EditorSettings
         [Header("Audio Sources")]
-        public AudioSource backgroungPlayer;
+        public AudioSource backgroundPlayer;
         public AudioSource effectPlayer;
 
         [Header("Audio Clips for effects")]
@@ -47,7 +48,12 @@ namespace KeyCrawler
         [Header("Settings")]
         [Tooltip("Prefab for the Player Object")]
         public GameObject playerPrefab;
+        [Tooltip("Spawnpoint for player")]
+        public Transform playerSpawnPoint;
         public EffectTypes ItemFoundEffect;
+        public EffectTypes PlayerDeathEffect;
+        public EffectTypes ShootEffect;
+        public EffectTypes FallingEffect;
         #endregion
 
         #region PrivateMember
@@ -58,6 +64,9 @@ namespace KeyCrawler
 
         void Start()
         {
+            // Make sure GO is persistent
+            DontDestroyOnLoad(gameObject);
+
             // Find references
             localPlayer = FindObjectOfType<Player>();
             localKeyboard = FindObjectOfType<Keyboard>();
@@ -82,16 +91,83 @@ namespace KeyCrawler
                 PlayBackground(debugStage);
                 playBackground = false;
             }
+
+            if(startGame)
+            {
+                StartGame();
+                startGame = false;
+            }
             #endregion
 
 
         }
 
         #region PublicMember
+
+        /// <summary>
+        /// Starts a game... quite obvious :D
+        /// </summary>
+        public void StartGame()
+        {
+            if(localPlayer == null)
+            {
+                GameObject go = Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation);
+                localPlayer = go.GetComponent<Player>();
+            }
+            PlayBackground(localPlayer.CurrentStage);
+            Debug.LogError("GameLogicManager.StartGame() loading level missing");
+        }
+
+        /// <summary>
+        /// found a KeyItem
+        /// </summary>
+        /// <param name="keyFunction">the keytype</param>
         public void KeyFound(KeyFunction keyFunction)
         {
             localKeyboard.AddKey(keyFunction);
             PlayEffect(ItemFoundEffect);
+        }
+
+        /// <summary>
+        /// found a key with a weapon
+        /// </summary>
+        /// <param name="keyFunction"></param>
+        public void WeaponFound(KeyFunction keyFunction)
+        {
+            KeyFound(keyFunction);
+        }
+
+        /// <summary>
+        /// found a weapon
+        /// </summary>
+        public void WeaponFound()
+        {
+            PlayEffect(ItemFoundEffect);
+        }
+
+        public void TriggerShot()
+        {
+            PlayEffect(ShootEffect);
+        }
+
+        public void TriggerFallingSound()
+        {
+            PlayEffect(FallingEffect);
+        }
+
+        public void TriggerDeathEffect()
+        {
+            PlayEffect(EffectTypes.death);
+        }
+        
+        public void PlayerDied()
+        {
+            Debug.LogError("Missing Function GameLogicManager.PlayerDied()");
+        }
+
+        public void UpdateBackground()
+        {
+            PlayBackground(localPlayer.CurrentStage);
         }
         #endregion
 
@@ -133,30 +209,30 @@ namespace KeyCrawler
         
         private void PlayBackground(PlayerStage stage)
         {
-            if (backgroungPlayer.isPlaying)
+            if (backgroundPlayer.isPlaying)
             {
-                backgroungPlayer.Stop();
+                backgroundPlayer.Stop();
             }
 
             switch (stage)
             {
                 case PlayerStage.crawlingOneWay:
-                    backgroungPlayer.clip = backgroundOne;
+                    backgroundPlayer.clip = backgroundOne;
                     break;
                 case PlayerStage.crawlingTwoWay:
-                    backgroungPlayer.clip = backgroundTwo;
+                    backgroundPlayer.clip = backgroundTwo;
                     break;
                 case PlayerStage.crawlingAll:
-                    backgroungPlayer.clip = backgroundThree;
+                    backgroundPlayer.clip = backgroundThree;
                     break;
                 case PlayerStage.walkingAll:
-                    backgroungPlayer.clip = backgroundFour;
+                    backgroundPlayer.clip = backgroundFour;
                     break;
             }
 
-            if (backgroungPlayer.clip != null)
+            if (backgroundPlayer.clip != null)
             {
-                backgroungPlayer.Play();
+                backgroundPlayer.Play();
             }
         }
         
@@ -164,7 +240,6 @@ namespace KeyCrawler
         {
             bool sane = true;
 
-            sane &= (localPlayer != null);
             sane &= (localKeyboard != null);
 
             return sane;
