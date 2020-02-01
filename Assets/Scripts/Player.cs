@@ -60,6 +60,7 @@ namespace KeyCrawler
 
         // References
         CharacterController charController;
+        Keyboard keyBoard;
 
         private Vector3 movementVector = Vector3.zero;
         #endregion
@@ -71,6 +72,7 @@ namespace KeyCrawler
 
             // Find references
             charController = gameObject.GetComponent<CharacterController>();
+            keyBoard = FindObjectOfType<Keyboard>();
             
             // Load settings
             currentHpMax = baseHP;
@@ -175,6 +177,7 @@ namespace KeyCrawler
             bool sane = true;
 
             sane &= (charController != null);
+            sane &= (keyBoard != null);
 
             return sane;
         }
@@ -189,10 +192,24 @@ namespace KeyCrawler
             {
                 case itemKind.upgrade:
                     LevelUp();
-                    Debug.LogError("Player.HandleItem: Missing KeyManager reference");
+                    try
+                    {
+                        keyBoard.AddKey((KeyFunction)item.getValue());
+                    }
+                    catch
+                    {
+                        Debug.LogError("Player.HandleItem: Item.getValue(): Unexpected Type: KeyFunction vs " + item.getValue().GetType().ToString());
+                    }
                     break;
                 case itemKind.key:
-                    Debug.LogError("Player.HandleItem: Missing KeyManager reference");
+                    try
+                    {
+                        keyBoard.AddKey((KeyFunction)item.getValue());
+                    }
+                    catch
+                    {
+                        Debug.LogError("Player.HandleItem: Item.getValue(): Unexpected Type: KeyFunction vs " + item.getValue().GetType().ToString());
+                    }
                     break;
                 case itemKind.health:
                     try
