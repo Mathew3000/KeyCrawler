@@ -66,6 +66,9 @@ namespace KeyCrawler
 
         void Start()
         {
+            // Set Fixed
+            DontDestroyOnLoad(gameObject);
+
             // Find references
             charController = gameObject.GetComponent<CharacterController>();
             
@@ -192,8 +195,24 @@ namespace KeyCrawler
                     Debug.LogError("Player.HandleItem: Missing KeyManager reference");
                     break;
                 case itemKind.health:
+                    try
+                    {
+                        AddHP((float)item.getValue());
+                    }
+                    catch
+                    {
+                        Debug.LogError("Player.HandleItem: Item.getValue(): Unexpected Type: float vs " + item.getValue().GetType().ToString());
+                    }
                     break;
                 case itemKind.weapon:
+                    try
+                    {
+                        Debug.LogWarning("Player.HandleItem: Weapon Not handled yet");
+                    }
+                    catch
+                    {
+                        Debug.LogError("Player.HandleItem: Item.getValue(): Unexpected Type: weaponType vs " + item.getValue().GetType().ToString());
+                    }
                     break;
                 default:
                     Debug.LogWarning("Player.HandleItem: Unexpected itemKind received: " + item.getKind().ToString());
