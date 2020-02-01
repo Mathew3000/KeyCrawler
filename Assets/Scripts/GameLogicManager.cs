@@ -48,6 +48,8 @@ namespace KeyCrawler
         [Tooltip("Prefab for the Player Object")]
         public GameObject playerPrefab;
         public EffectTypes ItemFoundEffect;
+        public EffectTypes PlayerDeathEffect;
+        public EffectTypes ShootEffect;
         #endregion
 
         #region PrivateMember
@@ -88,10 +90,39 @@ namespace KeyCrawler
         }
 
         #region PublicMember
+        /// <summary>
+        /// Called from the player when found a KeyItem
+        /// </summary>
+        /// <param name="keyFunction">the keytype</param>
         public void KeyFound(KeyFunction keyFunction)
         {
             localKeyboard.AddKey(keyFunction);
             PlayEffect(ItemFoundEffect);
+        }
+
+        /// <summary>
+        /// Called from the player when found a key with a weapon
+        /// </summary>
+        /// <param name="keyFunction"></param>
+        public void WeaponFound(KeyFunction keyFunction)
+        {
+            KeyFound(keyFunction);
+        }
+
+        /// <summary>
+        /// Called from the player when found a weapon
+        /// </summary>
+        public void WeaponFound()
+        {
+            PlayEffect(ItemFoundEffect);
+        }
+
+        /// <summary>
+        /// Called from the player to signalise the firing of a weapon
+        /// </summary>
+        public void TriggerShot()
+        {
+            PlayEffect(ShootEffect);
         }
         #endregion
 

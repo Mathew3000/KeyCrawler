@@ -281,6 +281,7 @@ namespace KeyCrawler
                     try
                     {
                         CanShoot = true;
+                        gameLogic.WeaponFound();
                     }
                     catch
                     {
@@ -317,6 +318,8 @@ namespace KeyCrawler
 
             }
             projectile.GetComponent<Rigidbody>().velocity = velocityVector * projectileSpeed;
+
+            gameLogic.TriggerShot();
         }
 
         /// <summary>
