@@ -10,6 +10,8 @@ namespace KeyCrawler
 
         void DoDamage(float value);
 
+        void FallToDeath();
+
         float GetLife();
     }
 
@@ -192,6 +194,12 @@ namespace KeyCrawler
             }
         }
         
+        public void FallToDeath()
+        {
+            gameLogic.TriggerFallingSound();
+            Die(true);
+        }
+
         public float GetLife()
         {
             return PlayerLife;
@@ -336,9 +344,13 @@ namespace KeyCrawler
         /// <summary>
         /// Kills the player
         /// </summary>
-        private void Die()
+        private void Die(bool silent = false)
         {
-            Debug.LogError("Missing Function Player.Die()");
+            if(!silent)
+            {
+                gameLogic.TriggerDeathEffect();
+            }
+            gameLogic.PlayerDied();
         }
         #endregion
 
