@@ -1,0 +1,23 @@
+Start with abilety to walk right
+
+Possible:
+-Walk Left
+-Walk up and down
+-Jump
+--Hit
+-Shoot
+
+Win: Esc - Close Game
+
+
+1- Walk Left
+
+
+2- Shoot
+
+
+3- Walk up and Down
+
+
+4- Jump
+
