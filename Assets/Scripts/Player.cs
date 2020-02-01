@@ -53,6 +53,8 @@ namespace KeyCrawler
         public GameObject projectilePrefab;
         [Tooltip("Projectile speed")]
         public float projectileSpeed = 5.0f;
+        [Tooltip("Projectile cooldown")]
+        public float projectileCooldown = 0.5f;
         #endregion
 
         #region Debug
@@ -76,6 +78,7 @@ namespace KeyCrawler
 
         private bool CanShoot = false;
 
+        private float cooldownLeft = 0.0f;
         // References
         CharacterController charController;
         GameLogicManager gameLogic;
@@ -116,6 +119,12 @@ namespace KeyCrawler
                 CanShoot = true;
             }
             #endregion
+
+            // Decrease Cooldown
+            if(cooldownLeft > 0)
+            {
+                cooldownLeft -= Time.deltaTime;
+            }
 
             // Player Movement
             // depending on current stage
@@ -160,9 +169,10 @@ namespace KeyCrawler
             // Shoot If possible
             if(CanShoot)
             {
-                if(Input.GetButtonDown("Fire1"))
+                if(Input.GetButton("Fire1") && (cooldownLeft <= 0))
                 {
                     ShootProjectile();
+                    cooldownLeft = projectileCooldown;
                 }
             }
 
@@ -338,6 +348,7 @@ namespace KeyCrawler
             if (CurrentStage != PlayerStage.walkingAll)
             {
                 CurrentStage++;
+                gameLogic.UpdateBackground();
             }
         }
 
