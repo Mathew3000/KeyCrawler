@@ -8,7 +8,7 @@ namespace KeyCrawler
     {
         void AddHP(float value);
 
-        void DoDamage();
+        void DoDamage(float value);
 
         float GetLife();
     }
