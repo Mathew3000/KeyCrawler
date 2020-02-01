@@ -47,6 +47,7 @@ namespace KeyCrawler
         [Header("Settings")]
         [Tooltip("Prefab for the Player Object")]
         public GameObject playerPrefab;
+        public EffectTypes ItemFoundEffect;
         #endregion
 
         #region PrivateMember
@@ -85,6 +86,14 @@ namespace KeyCrawler
 
 
         }
+
+        #region PublicMember
+        public void KeyFound(KeyFunction keyFunction)
+        {
+            localKeyboard.AddKey(keyFunction);
+            PlayEffect(ItemFoundEffect);
+        }
+        #endregion
 
         #region PrivateMember
         private void PlayEffect(EffectTypes sound)
@@ -132,16 +141,15 @@ namespace KeyCrawler
             switch (stage)
             {
                 case PlayerStage.crawlingOneWay:
-                case PlayerStage.crawlingTwoWay:
                     backgroungPlayer.clip = backgroundOne;
                     break;
-                case PlayerStage.crawlingAll:
+                case PlayerStage.crawlingTwoWay:
                     backgroungPlayer.clip = backgroundTwo;
                     break;
-                case PlayerStage.walkingAll:
+                case PlayerStage.crawlingAll:
                     backgroungPlayer.clip = backgroundThree;
                     break;
-                case PlayerStage.complete:
+                case PlayerStage.walkingAll:
                     backgroungPlayer.clip = backgroundFour;
                     break;
             }
