@@ -16,6 +16,7 @@ namespace KeyCrawler
     {
         itemKind getKind();
         AudioClip getSound();
+        object getValue();
     }
 
     public class Item : MonoBehaviour, IItem<Item>
@@ -23,6 +24,7 @@ namespace KeyCrawler
         #region Properties
         internal itemKind Kind { get; set; }
         internal AudioClip Sound;
+        internal object Value;
         #endregion
 
         #region Getter
@@ -34,6 +36,11 @@ namespace KeyCrawler
         public AudioClip getSound()
         {
             return Sound;
+        }
+
+        public object getValue()
+        {
+            return Value;
         }
         #endregion
 
