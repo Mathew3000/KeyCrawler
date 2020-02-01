@@ -11,7 +11,7 @@ namespace KeyCrawler
 
     public class Keyboard : MonoBehaviour, IKeyboard
     {
-        private KeyFunction[] enabledKeys;
+        private List<KeyFunction> enabledKeys = new List<KeyFunction>();
 
         // Start is called before the first frame update
         void Start()
@@ -25,7 +25,7 @@ namespace KeyCrawler
         
         }
 
-        void IKeyboard.AddKey(KeyFunction key)
+        public void AddKey(KeyFunction key)
         {
         }
     }
