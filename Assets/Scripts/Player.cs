@@ -76,7 +76,7 @@ namespace KeyCrawler
 
         // References
         CharacterController charController;
-        Keyboard keyBoard;
+        GameLogicManager gameLogic;
 
         private Vector3 movementVector = Vector3.zero;
         #endregion
@@ -88,7 +88,7 @@ namespace KeyCrawler
 
             // Find references
             charController = gameObject.GetComponent<CharacterController>();
-            keyBoard = FindObjectOfType<Keyboard>();
+            gameLogic = FindObjectOfType<GameLogicManager>();
             
             // Load settings
             currentHpMax = baseHP;
@@ -207,7 +207,7 @@ namespace KeyCrawler
             bool sane = true;
 
             sane &= (charController != null);
-            sane &= (keyBoard != null);
+            sane &= (gameLogic != null);
             sane &= (projectileSpawn != null);
             sane &= (projectilePrefab != null);
 
@@ -250,7 +250,7 @@ namespace KeyCrawler
                     LevelUp();
                     try
                     {
-                        keyBoard.AddKey((KeyFunction)item.getValue());
+                        gameLogic.KeyFound((KeyFunction)item.getValue());
                     }
                     catch
                     {
@@ -260,7 +260,7 @@ namespace KeyCrawler
                 case itemKind.key:
                     try
                     {
-                        keyBoard.AddKey((KeyFunction)item.getValue());
+                        gameLogic.KeyFound((KeyFunction)item.getValue());
                     }
                     catch
                     {
