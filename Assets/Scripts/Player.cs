@@ -66,6 +66,9 @@ namespace KeyCrawler
 
         void Start()
         {
+            // Set Fixed
+            DontDestroyOnLoad(gameObject);
+
             // Find references
             charController = gameObject.GetComponent<CharacterController>();
             
@@ -177,6 +180,50 @@ namespace KeyCrawler
         }
 
         /// <summary>
+        /// Handles an item collision
+        /// </summary>
+        /// <param name="item">the item to handle</param>
+        private void HandleItem(Item item)
+        {
+            switch(item.getKind())
+            {
+                case itemKind.upgrade:
+                    LevelUp();
+                    Debug.LogError("Player.HandleItem: Missing KeyManager reference");
+                    break;
+                case itemKind.key:
+                    Debug.LogError("Player.HandleItem: Missing KeyManager reference");
+                    break;
+                case itemKind.health:
+                    try
+                    {
+                        AddHP((float)item.getValue());
+                    }
+                    catch
+                    {
+                        Debug.LogError("Player.HandleItem: Item.getValue(): Unexpected Type: float vs " + item.getValue().GetType().ToString());
+                    }
+                    break;
+                case itemKind.weapon:
+                    try
+                    {
+                        Debug.LogWarning("Player.HandleItem: Weapon Not handled yet");
+                    }
+                    catch
+                    {
+                        Debug.LogError("Player.HandleItem: Item.getValue(): Unexpected Type: weaponType vs " + item.getValue().GetType().ToString());
+                    }
+                    break;
+                default:
+                    Debug.LogWarning("Player.HandleItem: Unexpected itemKind received: " + item.getKind().ToString());
+                    break;
+            }
+
+            // When finished delete the item
+            item.Despawn();
+        }
+
+        /// <summary>
         /// Increases the current playerstage
         /// </summary>
         private void LevelUp()
@@ -193,6 +240,16 @@ namespace KeyCrawler
         private void Die()
         {
             Debug.LogError("Missing Function Player.Die()");
+        }
+        #endregion
+
+        #region EventHandler
+        private void OnTriggerEnter(Collider other)
+        {
+            if(other.GetComponent<Item>() != null)
+            {
+                HandleItem(other.GetComponent<Item>());
+            }
         }
         #endregion
     }
