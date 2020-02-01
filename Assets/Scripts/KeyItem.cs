@@ -10,8 +10,11 @@ namespace KeyCrawler
         a,
         s,
         d,
+        q,
+        e,
+        enter,
+        esc,
         space,
-        enter
     }
 
     public class KeyItem : Item
