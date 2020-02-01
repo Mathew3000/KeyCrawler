@@ -43,19 +43,28 @@ namespace KeyCrawler
         public AudioClip backgroundTwo;
         public AudioClip backgroundThree;
         public AudioClip backgroundFour;
+
+        [Header("Settings")]
+        [Tooltip("Prefab for the Player Object")]
+        public GameObject playerPrefab;
         #endregion
 
         #region PrivateMember
         // References
         private Player localPlayer;
+        private Keyboard localKeyboard;
         #endregion
 
         void Start()
         {
             // Find references
             localPlayer = FindObjectOfType<Player>();
+            localKeyboard = FindObjectOfType<Keyboard>();
 
-
+            if(!SanityCheck())
+            {
+                Debug.LogError("GameLocigManager SanityCheck failed!");
+            }
         }
 
         void Update()
@@ -141,6 +150,16 @@ namespace KeyCrawler
             {
                 backgroungPlayer.Play();
             }
+        }
+        
+        private bool SanityCheck()
+        {
+            bool sane = true;
+
+            sane &= (localPlayer != null);
+            sane &= (localKeyboard != null);
+
+            return sane;
         }
         #endregion
     }
