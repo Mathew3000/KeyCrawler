@@ -805,7 +805,7 @@ PrefabInstance:
         type: 3}
       propertyPath: goRoom
       value: 
-      objectReference: {fileID: 9001363942661190563, guid: 22451a34fa0f50c41876a61fbe8972de,
+      objectReference: {fileID: 1046022625535827175, guid: 22451a34fa0f50c41876a61fbe8972de,
         type: 3}
     - target: {fileID: 5540507840183336611, guid: df6fe006bac3d984c9e4276255f25f78,
         type: 3}
