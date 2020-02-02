@@ -77,6 +77,7 @@ namespace KeyCrawler
         // References
         private Player localPlayer;
         private Keyboard localKeyboard;
+        private GameObject mainCamera;
         private int currentSceneIndex = 0;
         // How many enemies are in the current room
         private int enemyCounter = 0;
@@ -92,6 +93,8 @@ namespace KeyCrawler
             // Find references
             localPlayer = FindObjectOfType<Player>();
             localKeyboard = FindObjectOfType<Keyboard>();
+            mainCamera = Camera.main.gameObject;
+
 
             if(!SanityCheck())
             {
@@ -153,6 +156,14 @@ namespace KeyCrawler
             {
                 ReplacePlayer();
                 SceneManager.LoadSceneAsync(currentSceneIndex, LoadSceneMode.Single);
+            }
+        }
+
+        public void MoveCamera(Vector3 target)
+        {
+            if(mainCamera != null)
+            {
+                mainCamera.transform.position = target;
             }
         }
 
@@ -341,6 +352,7 @@ namespace KeyCrawler
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             playerSpawnPoint = FindObjectOfType<PlayerSpawn>()?.transform;
+            mainCamera = Camera.main.gameObject;
 
             if (localPlayer == null)
             {
