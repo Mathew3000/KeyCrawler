@@ -64,6 +64,9 @@ namespace KeyCrawler
         #region Debug
         [Header("Debugging")]
         public bool CanDoEverything = false;
+        public bool LowHpDie = false;
+        public bool FallingToDeath = false;
+
         #endregion
 
         #region Properties
@@ -77,17 +80,21 @@ namespace KeyCrawler
         #endregion
 
         #region PrivateVariables
+        // weapon already found?
         private bool CanShoot = false;
-
+        // maximum hp the player can have
         private float currentHpMax = 100.0f;
+        // cooldown for shooting
         private float cooldownLeft = 0.0f;
-
+        
+        // used to alternate the walking sound
         private int currentStep = 0;
 
         // References
         CharacterController charController;
         GameLogicManager gameLogic;
-
+        
+        // Vector for playermovement
         private Vector3 movementVector = Vector3.zero;
         #endregion
 
@@ -122,6 +129,18 @@ namespace KeyCrawler
             {
                 CurrentStage = PlayerStage.walkingAll;
                 CanShoot = true;
+            }
+
+            if(LowHpDie)
+            {
+                LowHpDie = false;
+                Die();
+            }
+
+            if(FallingToDeath)
+            {
+                FallingToDeath = false;
+                FallToDeath();
             }
             #endregion
 

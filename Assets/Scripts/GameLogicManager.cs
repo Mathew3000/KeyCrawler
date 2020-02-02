@@ -145,7 +145,15 @@ namespace KeyCrawler
         /// </summary>
         public void ReloadLevel()
         {
-            SceneManager.LoadSceneAsync(currentSceneIndex);
+            if(effectPlayer.isPlaying)
+            {
+                Invoke("ReloadLevel", 0.1f);
+            }
+            else
+            {
+                ReplacePlayer();
+                SceneManager.LoadSceneAsync(currentSceneIndex, LoadSceneMode.Single);
+            }
         }
 
         /// <summary>
@@ -318,6 +326,15 @@ namespace KeyCrawler
 
             return sane;
         }
+
+        private void ReplacePlayer()
+        {
+            if (localPlayer != null)
+            {
+                localPlayer.transform.position = playerSpawnPoint.position;
+                localPlayer.transform.rotation = playerSpawnPoint.rotation;
+            }
+        }
         #endregion
 
         #region EventHandler
@@ -330,6 +347,10 @@ namespace KeyCrawler
                 GameObject go = Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation);
                 localPlayer = go.GetComponent<Player>();
                 PlayBackground(localPlayer.CurrentStage);
+            }
+            else
+            {
+                ReplacePlayer();
             }
         }
         #endregion
