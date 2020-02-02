@@ -310,7 +310,10 @@ namespace KeyCrawler
 
             sane &= (charController != null);
             sane &= (gameLogic != null);
-            sane &= (projectileSpawn != null);
+            sane &= (projectileSpawnLeft != null);
+            sane &= (projectileSpawnRight != null);
+            sane &= (projectileSpawnUp != null);
+            sane &= (projectileSpawnDown != null);
             sane &= (projectilePrefab != null);
             sane &= (playerAnimator != null);
 
@@ -476,7 +479,25 @@ namespace KeyCrawler
 
         private void ShootProjectile()
         {
-            GameObject projectile = Instantiate(projectilePrefab, projectileSpawn.position, projectileSpawn.rotation);
+            Transform position = projectileSpawnLeft;
+
+            switch(CurrentDirection)
+            {
+                case PlayerDirection.down:
+                    position = projectileSpawnDown;
+                    break;
+                case PlayerDirection.left:
+                    position = projectileSpawnLeft;
+                    break;
+                case PlayerDirection.right:
+                    position = projectileSpawnRight;
+                    break;
+                case PlayerDirection.up:
+                    position = projectileSpawnUp;
+                    break;
+            }
+
+            GameObject projectile = Instantiate(projectilePrefab, position.position, position.rotation);
             Vector3 velocityVector = new Vector3();
             switch (CurrentDirection)
             {
