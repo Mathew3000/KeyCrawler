@@ -230,12 +230,25 @@ namespace KeyCrawler
         {
             if (walkingSound != null)
             {
-                if ((dir.magnitude > 0) && (!walkingSound.isPlaying))
+                if (dir.magnitude > 0.5) 
                 {
-                    walkingSound.Play();
+                    if(!walkingSound.isPlaying)
+                    {
+                        if(currentStep == 0)
+                        {
+                            walkingSound.clip = walkingClip_2;
+                            currentStep++;
+                        }
+                        else
+                        {
+                            walkingSound.clip = walkingClip_1;
+                            currentStep = 0;
+                        }
+                        walkingSound.Play();
+                    }
 
                 }
-                else if (dir.magnitude <= 0)
+                else
                 {
                     walkingSound.Stop();
                 }
