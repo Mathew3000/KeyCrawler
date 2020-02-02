@@ -103,23 +103,7 @@ namespace KeyCrawler
             // Set Fixed
             DontDestroyOnLoad(gameObject);
 
-            // Find references
-            charController = gameObject.GetComponent<CharacterController>();
-            gameLogic = FindObjectOfType<GameLogicManager>();
-            
-            // Load settings
-            currentHpMax = baseHP;
-            PlayerLife = baseHP;
-            CurrentDmg = baseDmg;
-            CurrentSpeed = baseSpeed;
-            CurrentStage = PlayerStage.crawlingOneWay;
-            CurrentJumpPower = baseJumpPower;
-            CurrentDirection = PlayerDirection.right;
-
-            if(!SanityCheck())
-            {
-                Debug.LogError("Player failed SanityCheck!");
-            }
+            Init();
         }
 
         void Update()
@@ -244,6 +228,27 @@ namespace KeyCrawler
         #endregion
 
         #region PrivateMember
+
+        private void Init()
+        {
+            // Find references
+            charController = gameObject.GetComponent<CharacterController>();
+            gameLogic = FindObjectOfType<GameLogicManager>();
+
+            // Load settings
+            currentHpMax = baseHP;
+            PlayerLife = baseHP;
+            CurrentDmg = baseDmg;
+            CurrentSpeed = baseSpeed;
+            CurrentStage = PlayerStage.crawlingOneWay;
+            CurrentJumpPower = baseJumpPower;
+            CurrentDirection = PlayerDirection.right;
+
+            if (!SanityCheck())
+            {
+                Debug.LogError("Player failed SanityCheck!");
+            }
+        }
 
         private void PlayWalkingSound(Vector3 dir)
         {
@@ -419,6 +424,7 @@ namespace KeyCrawler
                 gameLogic.TriggerDeathEffect();
             }
             gameLogic.PlayerDied();
+            Invoke("Init", 2f);
         }
         #endregion
 
