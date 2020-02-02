@@ -63,6 +63,8 @@ namespace KeyCrawler
         public AudioSource walkingSound;
         public AudioClip walkingClip_1;
         public AudioClip walkingClip_2;
+        [Tooltip("Cooldown for receiving damage")]
+        public float damageCooldown = 1.0f;
         #endregion
 
         #region Debug
@@ -90,8 +92,11 @@ namespace KeyCrawler
         private float currentHpMax = 100.0f;
         // cooldown for shooting
         private float cooldownLeft = 0.0f;
-        // whether animator is runnign
-        private bool animatorIsplaying = true;
+        private float dmgCooldownLeft = 0.0f;
+        // whether player is alive
+        private bool isAlive = true;
+        // whether player can receive damage
+        private bool canDamage = true;
 
         // used to alternate the walking sound
         private int currentStep = 0;
@@ -141,6 +146,10 @@ namespace KeyCrawler
             {
                 cooldownLeft -= Time.deltaTime;
             }
+            if(dmgCooldownLeft > 0)
+            {
+                dmgCooldownLeft -= Time.deltaTime;
+            }
 
             // Player Movement
             // depending on current stage
@@ -161,7 +170,7 @@ namespace KeyCrawler
             }
 
 
-            if (charController.isGrounded)
+            if ((charController.isGrounded) && isAlive)
             {
                 movementVector = new Vector3(hor, 0.0f, vert);
                 movementVector *= CurrentSpeed;
@@ -190,7 +199,7 @@ namespace KeyCrawler
             PlayWalkingSound(movementVector);
 
             // Shoot If possible
-            if (CanShoot)
+            if ((CanShoot) && (isAlive))
             {
                 if(Input.GetButton("Fire1") && (cooldownLeft <= 0))
                 {
@@ -223,11 +232,16 @@ namespace KeyCrawler
 
         public void DoDamage(float value)
         {
-            PlayerLife -= value;
-
-            if(PlayerLife <= 0)
+            if (dmgCooldownLeft > 0)
             {
-                Die();
+                PlayerLife -= value;
+
+                if (PlayerLife <= 0)
+                {
+                    Die();
+                }
+
+                dmgCooldownLeft = damageCooldown;
             }
         }
         
@@ -265,6 +279,9 @@ namespace KeyCrawler
             CurrentStage = PlayerStage.crawlingOneWay;
             CurrentJumpPower = baseJumpPower;
             CurrentDirection = PlayerDirection.right;
+
+            // Set Alive
+            isAlive = true;
 
             if (!SanityCheck())
             {
@@ -546,6 +563,7 @@ namespace KeyCrawler
                 gameLogic.TriggerDeathEffect();
             }
             gameLogic.PlayerDied();
+            isAlive = false;
             Invoke("Init", 2f);
         }
         #endregion
