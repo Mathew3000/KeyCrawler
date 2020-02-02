@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 namespace KeyCrawler
 {
@@ -86,13 +87,17 @@ namespace KeyCrawler
         private float currentHpMax = 100.0f;
         // cooldown for shooting
         private float cooldownLeft = 0.0f;
-        
+        // whether animator is runnign
+        private bool animatorIsplaying = true;
+
         // used to alternate the walking sound
         private int currentStep = 0;
 
         // References
         CharacterController charController;
         GameLogicManager gameLogic;
+        Animator playerAnimator;
+        PlayerDirection lastDirection = PlayerDirection.down;
         
         // Vector for playermovement
         private Vector3 movementVector = Vector3.zero;
@@ -158,11 +163,15 @@ namespace KeyCrawler
                 movementVector = new Vector3(hor, 0.0f, vert);
                 movementVector *= CurrentSpeed;
 
+                // Map Movement
+                MapDirection(movementVector);
+
                 // Jump
                 if (CurrentStage >= PlayerStage.walkingAll)
                 {
                     if (Input.GetButton("Jump"))
                     {
+                        MapJump();
                         movementVector.y = CurrentJumpPower;
                     }
                 }
@@ -186,9 +195,6 @@ namespace KeyCrawler
                     cooldownLeft = projectileCooldown;
                 }
             }
-
-            // Map Movement
-            MapDirection(movementVector);
         }
 
         #region PublicMember
@@ -241,6 +247,12 @@ namespace KeyCrawler
             // Find references
             charController = gameObject.GetComponent<CharacterController>();
             gameLogic = FindObjectOfType<GameLogicManager>();
+            playerAnimator = GetComponentInChildren<Animator>();
+
+            if(playerAnimator != null)
+            {
+                playerAnimator.speed = 0.5f;
+            }
 
             // Load settings
             currentHpMax = baseHP;
@@ -297,6 +309,7 @@ namespace KeyCrawler
             sane &= (gameLogic != null);
             sane &= (projectileSpawn != null);
             sane &= (projectilePrefab != null);
+            sane &= (playerAnimator != null);
 
             return sane;
         }
@@ -307,21 +320,95 @@ namespace KeyCrawler
         /// <param name="dir">the direction to check</param>
         private void MapDirection(Vector3 dir)
         {
-            if (dir.x > 0)
+            if (charController.isGrounded)
             {
-                CurrentDirection = PlayerDirection.right;
+                if (dir.x > 0)
+                {
+                    CurrentDirection = PlayerDirection.right;
+                }
+                else if (dir.x < 0)
+                {
+                    CurrentDirection = PlayerDirection.left;
+                }
+                if (dir.z > 0)
+                {
+                    CurrentDirection = PlayerDirection.up;
+                }
+                else if (dir.z < 0)
+                {
+                    CurrentDirection = PlayerDirection.down;
+                }
+
+                if (lastDirection != CurrentDirection)
+                {
+                    if (CurrentStage > PlayerStage.crawlingAll)
+                    {
+                        switch (CurrentDirection)
+                        {
+                            case PlayerDirection.down:
+                                playerAnimator.SetTrigger("WalkDown");
+                                break;
+                            case PlayerDirection.left:
+                                playerAnimator.SetTrigger("WalkLeft");
+                                break;
+                            case PlayerDirection.right:
+                                playerAnimator.SetTrigger("WalkRight");
+                                break;
+                            case PlayerDirection.up:
+                                playerAnimator.SetTrigger("WalkUp");
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        switch (CurrentDirection)
+                        {
+                            case PlayerDirection.down:
+                                playerAnimator.SetTrigger("CrawlingDown");
+                                break;
+                            case PlayerDirection.left:
+                                playerAnimator.SetTrigger("CrawlingLeft");
+                                break;
+                            case PlayerDirection.right:
+                                playerAnimator.SetTrigger("CrawlingRight");
+                                break;
+                            case PlayerDirection.up:
+                                playerAnimator.SetTrigger("CrawlingUp");
+                                break;
+                        }
+                    }
+                    lastDirection = CurrentDirection;
+                }
+
+                /*
+                if(dir.magnitude < 0.5)
+                {
+                    playerAnimator.StopPlayback();
+                    animatorIsplaying = false;
+                }
+                else if(!animatorIsplaying)
+                {
+                    playerAnimator.StartPlayback();
+                }*/
             }
-            else if(dir.x < 0)
+        }
+
+        private void MapJump()
+        {
+            switch (CurrentDirection)
             {
-                CurrentDirection = PlayerDirection.left;
-            }
-            if(dir.z > 0)
-            {
-                CurrentDirection = PlayerDirection.up;
-            }
-            else if(dir.z < 0)
-            {
-                CurrentDirection = PlayerDirection.down;
+                case PlayerDirection.down:
+                    playerAnimator.SetTrigger("JumpDown");
+                    break;
+                case PlayerDirection.left:
+                    playerAnimator.SetTrigger("JumpLeft");
+                    break;
+                case PlayerDirection.right:
+                    playerAnimator.SetTrigger("JumpRight");
+                    break;
+                case PlayerDirection.up:
+                    playerAnimator.SetTrigger("JumpUp");
+                    break;
             }
         }
 
