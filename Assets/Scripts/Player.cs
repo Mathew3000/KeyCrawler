@@ -93,6 +93,7 @@ namespace KeyCrawler
         // cooldown for shooting
         private float cooldownLeft = 0.0f;
         private float dmgCooldownLeft = 0.0f;
+        private float levelup_cooldown = 0.0f;
         // whether player is alive
         private bool isAlive = true;
         // whether player can receive damage
@@ -150,6 +151,11 @@ namespace KeyCrawler
             {
                 dmgCooldownLeft -= Time.deltaTime;
             }
+            if(levelup_cooldown > 0)
+            {
+                levelup_cooldown -= Time.deltaTime;
+            }
+
 
             // Player Movement
             // depending on current stage
@@ -549,10 +555,14 @@ namespace KeyCrawler
         /// </summary>
         private void LevelUp()
         {
-            if (CurrentStage != PlayerStage.walkingAll)
+            if (levelup_cooldown <= 0)
             {
-                CurrentStage++;
-                gameLogic.UpdateBackground();
+                if (CurrentStage != PlayerStage.walkingAll)
+                {
+                    CurrentStage++;
+                    gameLogic.UpdateBackground();
+                }
+                levelup_cooldown = 1.0f;
             }
         }
 
