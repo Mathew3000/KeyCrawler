@@ -49,7 +49,10 @@ namespace KeyCrawler
         public float baseJumpPower = 8.0f;
         [Header("Shooting")]
         [Tooltip("SpawnPosition for projectile")]
-        public Transform projectileSpawn;
+        public Transform projectileSpawnLeft;
+        public Transform projectileSpawnRight;
+        public Transform projectileSpawnUp;
+        public Transform projectileSpawnDown;
         [Tooltip("Projectile prefab")]
         public GameObject projectilePrefab;
         [Tooltip("Projectile speed")]
