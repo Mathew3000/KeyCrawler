@@ -244,11 +244,14 @@ namespace KeyCrawler
                 dmgCooldownLeft = damageCooldown;
             }
         }
-        
+
         public void FallToDeath()
         {
-            gameLogic.TriggerFallingSound();
-            Die(true);
+            if (isAlive)
+            {
+                gameLogic.TriggerFallingSound();
+                Die(true);
+            }
         }
 
         public float GetLife()
@@ -558,13 +561,16 @@ namespace KeyCrawler
         /// </summary>
         private void Die(bool silent = false)
         {
-            if(!silent)
+            if (isAlive)
             {
-                gameLogic.TriggerDeathEffect();
+                if (!silent)
+                {
+                    gameLogic.TriggerDeathEffect();
+                }
+                gameLogic.PlayerDied();
+                isAlive = false;
+                Invoke("Init", 2f);
             }
-            gameLogic.PlayerDied();
-            isAlive = false;
-            Invoke("Init", 2f);
         }
         #endregion
 
