@@ -57,6 +57,10 @@ namespace KeyCrawler
         public EffectTypes FallingEffect;
         [Tooltip("How long it takes to reload the scene after player died")]
         public float deathReloadDelay = 2.0f;
+        [Tooltip("Objects for menu Images")]
+        public GameObject startImage;
+        public GameObject mainimage;
+        
         #endregion
 
         #region Properties
@@ -137,6 +141,9 @@ namespace KeyCrawler
         /// </summary>
         public void StartGame()
         {
+            mainimage.SetActive(true);
+            startImage.SetActive(false);
+
             // Init keyboard
             localKeyboard.looseAllKeys();
 
