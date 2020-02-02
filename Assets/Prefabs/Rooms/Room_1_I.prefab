@@ -1210,7 +1210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65eee5a5f91d3e14ab126690d6ff28a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  KeyFunction: 3
+  KeyFunction: 1
   upgradeKind: 0
 --- !u!54 &9195218457689609730
 Rigidbody:
