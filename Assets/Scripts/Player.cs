@@ -191,6 +191,13 @@ namespace KeyCrawler
             MapDirection(movementVector);
         }
 
+        #region PublicMember
+        public void ForceMoveToTarget(Vector3 target)
+        {
+            gameObject.transform.position = target;
+        }
+        #endregion
+
         #region InterfaceMember
         public void AddHP(float value)
         {
