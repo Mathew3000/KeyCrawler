@@ -147,6 +147,8 @@ namespace KeyCrawler
             // Init keyboard
             localKeyboard.looseAllKeys();
 
+            localKeyboard.AddKey(KeyFunction.d);
+
             LoadNextLevel();
         }
 
