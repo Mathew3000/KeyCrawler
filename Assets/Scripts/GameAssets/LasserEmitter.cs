@@ -54,7 +54,7 @@ namespace KeyCrawler{
 
         IEnumerator Cycle()
         {
-            yield return new WaitForSeconds(4f);
+            yield return new WaitForSeconds(2f);
             if (bIsOn)
             {
                 bIsOn = false;

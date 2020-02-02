@@ -191,6 +191,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 211013565989495074}
     m_Modifications:
+    - target: {fileID: 9032126149328892513, guid: 099471eb459876a47bdee5ce2245fdb3,
+        type: 3}
+      propertyPath: fDellay
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 9032126149328892517, guid: 099471eb459876a47bdee5ce2245fdb3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -367,7 +372,7 @@ PrefabInstance:
     - target: {fileID: 716491545203971684, guid: 5b08b1591a43b6f45a8a76a7976a66cd,
         type: 3}
       propertyPath: m_Name
-      value: Room_1_S
+      value: Room_1_1
       objectReference: {fileID: 0}
     - target: {fileID: 716491545203971684, guid: 5b08b1591a43b6f45a8a76a7976a66cd,
         type: 3}
@@ -544,6 +549,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 211013565989495074}
     m_Modifications:
+    - target: {fileID: 9032126149328892513, guid: 099471eb459876a47bdee5ce2245fdb3,
+        type: 3}
+      propertyPath: fDellay
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 9032126149328892517, guid: 099471eb459876a47bdee5ce2245fdb3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -939,6 +949,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 211013565989495074}
     m_Modifications:
+    - target: {fileID: 9032126149328892513, guid: 099471eb459876a47bdee5ce2245fdb3,
+        type: 3}
+      propertyPath: fDellay
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 9032126149328892517, guid: 099471eb459876a47bdee5ce2245fdb3,
         type: 3}
       propertyPath: m_LocalPosition.x
