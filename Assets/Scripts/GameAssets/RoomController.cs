@@ -18,6 +18,8 @@ namespace KeyCrawler
 
         private void OnTriggerEnter(Collider other)
         {
+            Debug.Log(other.name + "has entered the trigger off" + this.name);
+
             if (other.GetComponent<Camera>())
             {
                 goAktivRoom = Instantiate(goRoom);

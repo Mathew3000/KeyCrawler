@@ -15,8 +15,8 @@ namespace KeyCrawler
         }
         public Collider DoorCloseBlock;
 
-        const float SideMove = 5;
-        const float TopMove = 3;
+        const float fSideMove = 5;
+        const float fTopMove = 3;
 
         GameLogicManager gameLogicManager;
 
@@ -28,7 +28,7 @@ namespace KeyCrawler
         private void Start()
         {
             CloseDoor();
-            gameLogicManager = GameObject.Find("GameLogicManager").GetComponent<GameLogicManager>();
+            gameLogicManager = GameObject.Find("Managers").GetComponent<GameLogicManager>();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -38,25 +38,29 @@ namespace KeyCrawler
                 switch (side)
                 {
                     case DoorSide.Left:
-                        CamMove = new Vector3();
-                        PlayerMove = new Vector3();
+                        CamMove = new Vector3(-10,0,0);
+                        PlayerMove = new Vector3(-10, 0, 0);
                         break;
                     case DoorSide.Right:
-                        CamMove = new Vector3();
-                        PlayerMove = new Vector3();
+                        CamMove = new Vector3(10, 0, 0);
+                        PlayerMove = new Vector3(10, 0, 0);
                         break;
                     case DoorSide.Top:
-                        CamMove = new Vector3();
-                        PlayerMove = new Vector3();
+                        CamMove = new Vector3(0,0,10);
+                        PlayerMove = new Vector3(0,0,10);
                         break;
                     case DoorSide.Bottom:
-                        CamMove = new Vector3();
-                        PlayerMove = new Vector3();
+                        CamMove = new Vector3(0,0,-10);
+                        PlayerMove = new Vector3(0,0,-10);
                         break;
                 }
 
-                GameObject.Find("Player").transform.position = GameObject.Find("Player").transform.position + PlayerMove;
-                GameObject.Find("Camera").transform.position = GameObject.Find("Camera").transform.position + CamMove;
+                //Vector3 v3TargetPostion = other.gameObject.transform.position + PlayerMove;
+                //Vector3.Lerp(other.gameObject.transform.position, v3TargetPostion, Time.deltaTime);
+                other.GetComponent<CharacterController>().enabled = false;
+                other.gameObject.transform.position = other.gameObject.transform.position + PlayerMove;
+                other.GetComponent<CharacterController>().enabled = true;
+                GameObject.Find("Main Camera").transform.position = GameObject.Find("Main Camera").transform.position + CamMove;
 
             }
         }
