@@ -485,15 +485,19 @@ namespace KeyCrawler
             {
                 case PlayerDirection.down:
                     position = projectileSpawnDown;
+                    playerAnimator.SetTrigger("FireDown");
                     break;
                 case PlayerDirection.left:
                     position = projectileSpawnLeft;
+                    playerAnimator.SetTrigger("FireLeft");
                     break;
                 case PlayerDirection.right:
                     position = projectileSpawnRight;
+                    playerAnimator.SetTrigger("FireRight");
                     break;
                 case PlayerDirection.up:
                     position = projectileSpawnUp;
+                    playerAnimator.SetTrigger("FireUp");
                     break;
             }
 

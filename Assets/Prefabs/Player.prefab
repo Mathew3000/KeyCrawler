@@ -488,7 +488,10 @@ MonoBehaviour:
   baseHP: 100
   baseSpeed: 5
   baseJumpPower: 8
-  projectileSpawn: {fileID: 6887265424327270972}
+  projectileSpawnLeft: {fileID: 6887265424327270972}
+  projectileSpawnRight: {fileID: 3247684073059528163}
+  projectileSpawnUp: {fileID: 1161104974168611310}
+  projectileSpawnDown: {fileID: 2162120055170943222}
   projectilePrefab: {fileID: 4628896306327154075, guid: 4082b5bb91f3ddc4ebaa209112005c6f,
     type: 3}
   projectileSpeed: 20
