@@ -55,6 +55,10 @@ namespace KeyCrawler
         public float projectileSpeed = 5.0f;
         [Tooltip("Projectile cooldown")]
         public float projectileCooldown = 0.5f;
+        [Tooltip("audio to play when walking")]
+        public AudioSource walkingSound;
+        public AudioClip walkingClip_1;
+        public AudioClip walkingClip_2;
         #endregion
 
         #region Debug
@@ -73,12 +77,13 @@ namespace KeyCrawler
         #endregion
 
         #region PrivateVariables
-
-        private float currentHpMax = 100.0f;
-
         private bool CanShoot = false;
 
+        private float currentHpMax = 100.0f;
         private float cooldownLeft = 0.0f;
+
+        private int currentStep = 0;
+
         // References
         CharacterController charController;
         GameLogicManager gameLogic;
@@ -166,8 +171,11 @@ namespace KeyCrawler
             // Apply Movement
             charController.Move(movementVector * Time.deltaTime);
 
+            // Check if sound should be played
+            PlayWalkingSound(movementVector);
+
             // Shoot If possible
-            if(CanShoot)
+            if (CanShoot)
             {
                 if(Input.GetButton("Fire1") && (cooldownLeft <= 0))
                 {
@@ -217,6 +225,36 @@ namespace KeyCrawler
         #endregion
 
         #region PrivateMember
+
+        private void PlayWalkingSound(Vector3 dir)
+        {
+            if (walkingSound != null)
+            {
+                if (dir.magnitude > 0.5) 
+                {
+                    if(!walkingSound.isPlaying)
+                    {
+                        if(currentStep == 0)
+                        {
+                            walkingSound.clip = walkingClip_2;
+                            currentStep++;
+                        }
+                        else
+                        {
+                            walkingSound.clip = walkingClip_1;
+                            currentStep = 0;
+                        }
+                        walkingSound.Play();
+                    }
+
+                }
+                else
+                {
+                    walkingSound.Stop();
+                }
+            }
+        }
+
         /// <summary>
         /// Checks if allo references are assigned
         /// </summary>

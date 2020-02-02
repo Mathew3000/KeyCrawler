@@ -55,6 +55,8 @@ namespace KeyCrawler
         public EffectTypes PlayerDeathEffect;
         public EffectTypes ShootEffect;
         public EffectTypes FallingEffect;
+        [Tooltip("How long it takes to reload the scene after player died")]
+        public float deathReloadDelay = 2.0f;
         #endregion
 
         #region Properties
@@ -62,8 +64,11 @@ namespace KeyCrawler
         {
             get
             {
-                Debug.LogError("Needs to be calculated");
-                return true;
+                bool clear = true;
+
+                clear &= (enemyCounter <= 0);
+
+                return clear;
             }
         }
         #endregion
@@ -73,6 +78,8 @@ namespace KeyCrawler
         private Player localPlayer;
         private Keyboard localKeyboard;
         private int currentSceneIndex = 0;
+        // How many enemies are in the current room
+        private int enemyCounter = 0;
         #endregion
 
 
@@ -181,29 +188,60 @@ namespace KeyCrawler
             PlayEffect(ItemFoundEffect);
         }
 
+        /// <summary>
+        /// Triggers the shooting sound
+        /// </summary>
         public void TriggerShot()
         {
             PlayEffect(ShootEffect);
         }
 
+        /// <summary>
+        /// Triggers the falling sound
+        /// </summary>
         public void TriggerFallingSound()
         {
             PlayEffect(FallingEffect);
         }
 
+        /// <summary>
+        /// Triggers playerdeath
+        /// </summary>
         public void TriggerDeathEffect()
         {
             PlayEffect(EffectTypes.death);
         }
         
+        /// <summary>
+        /// Called when player is dead
+        /// </summary>
         public void PlayerDied()
         {
-            Debug.LogError("Missing Function GameLogicManager.PlayerDied()");
+            Invoke("ReloadLevel", deathReloadDelay);
         }
 
+        /// <summary>
+        /// Updates the playersound
+        /// </summary>
         public void UpdateBackground()
         {
             PlayBackground(localPlayer.CurrentStage);
+        }
+        
+        /// <summary>
+        /// Adds an enemy
+        /// </summary>
+        public void AddEnemy()
+        {
+            enemyCounter++;
+        }
+
+        /// <summary>
+        /// Removes an enemy
+        /// </summary>
+        public void RemoveEnemy()
+        {
+            enemyCounter--;
         }
         #endregion
 
