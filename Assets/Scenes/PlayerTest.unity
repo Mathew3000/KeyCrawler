@@ -354,7 +354,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 244937621}
   m_LocalRotation: {x: 0.60876137, y: 0, z: 0, w: 0.7933534}
-  m_LocalPosition: {x: 0.83, y: 37.79, z: -12.67}
+  m_LocalPosition: {x: 1.6, y: 17.6, z: -6.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -468,7 +468,7 @@ PrefabInstance:
     - target: {fileID: 1160708629518442840, guid: e1ba4a224891f7a40a90d64d98f2085f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.51
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1160708629518442840, guid: e1ba4a224891f7a40a90d64d98f2085f,
         type: 3}
@@ -543,7 +543,7 @@ PrefabInstance:
     - target: {fileID: 1160708629518442840, guid: e1ba4a224891f7a40a90d64d98f2085f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.96
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1160708629518442840, guid: e1ba4a224891f7a40a90d64d98f2085f,
         type: 3}
@@ -617,7 +617,7 @@ PrefabInstance:
     - target: {fileID: 1160708629518442840, guid: e1ba4a224891f7a40a90d64d98f2085f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.96
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1160708629518442840, guid: e1ba4a224891f7a40a90d64d98f2085f,
         type: 3}
@@ -749,6 +749,7 @@ MonoBehaviour:
   PlayerDeathEffect: 5
   ShootEffect: 3
   FallingEffect: 4
+  deathReloadDelay: 2
 --- !u!114 &1356939267
 MonoBehaviour:
   m_ObjectHideFlags: 0
