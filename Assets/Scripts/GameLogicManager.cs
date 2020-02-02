@@ -213,6 +213,7 @@ namespace KeyCrawler
         /// </summary>
         public void WeaponFound()
         {
+            localKeyboard.AddKey(KeyFunction.enter);
             PlayEffect(ItemFoundEffect);
         }
 
