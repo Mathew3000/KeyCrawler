@@ -73,12 +73,20 @@ namespace KeyCrawler
                 case KeyFunction.space:
                     keySpace.SetActive(true);
                     break;
+                default: return;
             }
         }
 
         public void looseAllKeys ()
         {
-
+            Transform[] allChildren = GetComponentsInChildren<Transform>();
+            foreach (Transform child in allChildren)
+            {
+                if (!(child.GetComponent<Canvas>() || child.GetComponent<Keyboard>() || child.GetComponent<AudioSource>()))
+                {
+                    child.gameObject.SetActive(false);
+                }
+            }
         }
     }
 }
