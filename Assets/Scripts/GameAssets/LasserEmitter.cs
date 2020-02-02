@@ -37,9 +37,12 @@ namespace KeyCrawler{
                         {
                             hit.transform.GetComponent<Player>().DoDamage(1f);
                         }
-                        
-                        //TODO Draw in Game
-                    }
+
+                    this.GetComponent<LineRenderer>().SetPosition(0, this.transform.position);
+                    this.GetComponent<LineRenderer>().SetPosition(1, hit.point);
+
+                    //TODO Draw in Game
+                }
                 }
             }
 
@@ -58,10 +61,13 @@ namespace KeyCrawler{
             if (bIsOn)
             {
                 bIsOn = false;
+                this.GetComponent<LineRenderer>().enabled = false;
             }
+        
             else
             {
                 bIsOn = true;
+                this.GetComponent<LineRenderer>().enabled = true;
             }
             StartCoroutine(Cycle());
             yield return null;
