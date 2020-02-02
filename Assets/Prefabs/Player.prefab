@@ -499,6 +499,7 @@ MonoBehaviour:
   walkingSound: {fileID: 6706545992078169986}
   walkingClip_1: {fileID: 8300000, guid: 4c8f51d05302c804c9041ac3204e4bcb, type: 3}
   walkingClip_2: {fileID: 8300000, guid: cc52558b6bd2ab44e8c5c76f60ba0c4e, type: 3}
+  damageCooldown: 1
   CanDoEverything: 0
   LowHpDie: 0
   FallingToDeath: 0
