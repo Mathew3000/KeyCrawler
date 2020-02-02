@@ -77,6 +77,7 @@ namespace KeyCrawler
         // References
         private Player localPlayer;
         private Keyboard localKeyboard;
+        private GameObject mainCamera;
         private int currentSceneIndex = 0;
         // How many enemies are in the current room
         private int enemyCounter = 0;
@@ -92,6 +93,8 @@ namespace KeyCrawler
             // Find references
             localPlayer = FindObjectOfType<Player>();
             localKeyboard = FindObjectOfType<Keyboard>();
+            mainCamera = Camera.main.gameObject;
+
 
             if(!SanityCheck())
             {
@@ -145,7 +148,23 @@ namespace KeyCrawler
         /// </summary>
         public void ReloadLevel()
         {
-            SceneManager.LoadSceneAsync(currentSceneIndex);
+            if(effectPlayer.isPlaying)
+            {
+                Invoke("ReloadLevel", 0.1f);
+            }
+            else
+            {
+                ReplacePlayer();
+                SceneManager.LoadSceneAsync(currentSceneIndex, LoadSceneMode.Single);
+            }
+        }
+
+        public void MoveCamera(Vector3 target)
+        {
+            if(mainCamera != null)
+            {
+                mainCamera.transform.position = target;
+            }
         }
 
         /// <summary>
@@ -318,18 +337,32 @@ namespace KeyCrawler
 
             return sane;
         }
+
+        private void ReplacePlayer()
+        {
+            if (localPlayer != null)
+            {
+                localPlayer.transform.position = playerSpawnPoint.position;
+                localPlayer.transform.rotation = playerSpawnPoint.rotation;
+            }
+        }
         #endregion
 
         #region EventHandler
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             playerSpawnPoint = FindObjectOfType<PlayerSpawn>()?.transform;
+            mainCamera = Camera.main.gameObject;
 
             if (localPlayer == null)
             {
                 GameObject go = Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation);
                 localPlayer = go.GetComponent<Player>();
                 PlayBackground(localPlayer.CurrentStage);
+            }
+            else
+            {
+                ReplacePlayer();
             }
         }
         #endregion
