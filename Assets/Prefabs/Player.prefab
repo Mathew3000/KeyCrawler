@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4102396056709466550}
   - component: {fileID: 6706545992078169986}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WalkingPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6887265424234701169}
   - component: {fileID: 6887265424234701168}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlayerSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +216,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6887265424327270972}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ProjectileSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 6887265424490136412}
   - component: {fileID: 6887265424490136413}
   - component: {fileID: 6887265424490136410}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}

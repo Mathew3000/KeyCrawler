@@ -54,9 +54,7 @@ namespace KeyCrawler
                         PlayerMove = new Vector3(0,0,-10);
                         break;
                 }
-
-                //Vector3 v3TargetPostion = other.gameObject.transform.position + PlayerMove;
-                //Vector3.Lerp(other.gameObject.transform.position, v3TargetPostion, Time.deltaTime);
+                
                 other.GetComponent<CharacterController>().enabled = false;
                 other.gameObject.transform.position = other.gameObject.transform.position + PlayerMove;
                 other.GetComponent<CharacterController>().enabled = true;
