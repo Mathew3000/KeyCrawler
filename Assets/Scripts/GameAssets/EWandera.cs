@@ -40,13 +40,13 @@ namespace KeyCrawler
 
         private void Update()
         {
-            this.transform.position = this.transform.position + (v3MoveDirection * fSpeed * Time.deltaTime);
+            this.GetComponent<CharacterController>().Move(v3MoveDirection * fSpeed * Time.deltaTime);
         }
 
 
         IEnumerator AI()
         {
-            fMoveTime = Random.value * 2 + 2;
+            fMoveTime = Random.Range(0.8f, 1.2f);
 
             float fRandDirection = Random.Range(0, 360);
             v3MoveDirection = new Vector3(Mathf.Cos(fRandDirection), 0, Mathf.Sin(fRandDirection));
@@ -59,7 +59,7 @@ namespace KeyCrawler
 
         IEnumerator AI_Break()
         {
-            fMoveTime = Random.value * 2 + 0.5f;
+            fMoveTime = Random.Range(0.8f, 1f);
             
             v3MoveDirection = v3MoveDirection * -1;
 
