@@ -1,0 +1,775 @@
+fileFormatVersion: 2
+guid: c8c2cd5225244194d9787a861e9fea61
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7182982842646375198
+    second: lootKeySheet 1_0
+  - first:
+      213: -8220207843744299434
+    second: lootKeySheet 1_1
+  - first:
+      213: -8012132556930119846
+    second: lootKeySheet 1_2
+  - first:
+      213: 8430822860059436083
+    second: lootKeySheet 1_3
+  - first:
+      213: -8877170622398105042
+    second: lootKeySheet 1_4
+  - first:
+      213: 2282892397703387201
+    second: lootKeySheet 1_5
+  - first:
+      213: -6317913642104344322
+    second: lootKeySheet 1_6
+  - first:
+      213: -3977119776941790322
+    second: lootKeySheet 1_7
+  - first:
+      213: -4203703176861932980
+    second: lootKeySheet 1_8
+  - first:
+      213: -3833863224400072855
+    second: lootKeySheet 1_9
+  - first:
+      213: 4466015721226300287
+    second: lootKeySheet 1_10
+  - first:
+      213: -661380768721856950
+    second: lootKeySheet 1_11
+  - first:
+      213: -736006433066911036
+    second: lootKeySheet 1_12
+  - first:
+      213: -3342786715054422050
+    second: lootKeySheet 1_13
+  - first:
+      213: -8136729158058194250
+    second: lootKeySheet 1_14
+  - first:
+      213: -209838889895533997
+    second: lootKeySheet 1_15
+  - first:
+      213: -893870058611691942
+    second: lootKeySheet 1_16
+  - first:
+      213: 8250784909177781148
+    second: lootKeySheet 1_17
+  - first:
+      213: -475167979532609797
+    second: lootKeySheet 1_18
+  - first:
+      213: -1612862648187518784
+    second: lootKeySheet 1_19
+  - first:
+      213: -7730720756809565866
+    second: lootKeySheet 1_20
+  - first:
+      213: 9059698692131540493
+    second: lootKeySheet 1_21
+  - first:
+      213: 4092603194313889383
+    second: lootKeySheet 1_22
+  - first:
+      213: 7273232688288802227
+    second: lootKeySheet 1_23
+  - first:
+      213: 719170590758384723
+    second: lootKeySheet 1_24
+  - first:
+      213: 8590217450152282416
+    second: lootKeySheet 1_25
+  - first:
+      213: 8270881831903037732
+    second: lootKeySheet 1_26
+  - first:
+      213: 4608070196589003705
+    second: lootKeySheet 1_27
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: 1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 0
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: lootKeySheet 1_0
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 3090
+        width: 480
+        height: 432
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00765243d1f8ad24c8d9647b725e7e83
+      internalID: -7182982842646375198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lootKeySheet 1_1
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 3066
+        width: 482
+        height: 433
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2169e6a0fad914248b905bccb108afc6
+      internalID: -8220207843744299434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lootKeySheet 1_2
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 3090
+        width: 480
+        height: 432
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b8d112a7c9ed17488f6f977a1ad63d1
+      internalID: -8012132556930119846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lootKeySheet 1_3
+      rect:
+        serializedVersion: 2
+        x: 1552
+        y: 3090
+        width: 481
+        height: 432
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96ee8b1299b113e4fbbf77aec3c8fc3f
+      internalID: 8430822860059436083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lootKeySheet 1_4
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 2577
+        width: 480
+        height: 434
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a58ca0338a87cef4ca8e951b4ae2e3b3
+      internalID: -8877170622398105042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lootKeySheet 1_5
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 2577
+        width: 481
+        height: 434
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 889e1186c085d8046b77c5795c32692f
+      internalID: 2282892397703387201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lootKeySheet 1_6
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 2577
+        width: 480
+        height: 434
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 600155cc9de8ac64484a71f2717dcf67
+      internalID: -6317913642104344322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lootKeySheet 1_7
+      rect:
+        serializedVersion: 2
+        x: 1552
+        y: 2577
+        width: 481
+        height: 434
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e1f4cf6c7272224e905fbe07467fc4d
+      internalID: -3977119776941790322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lootKeySheet 1_8
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 2066
+        width: 480
+        height: 432
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f22d9c15ebb5d6047b1551eb4f773c8e
+      internalID: -4203703176861932980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lootKeySheet 1_9
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 2066
+        width: 481
+        height: 432
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9376f33f032b3ee4589722dcb4b02123
+      internalID: -3833863224400072855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lootKeySheet 1_10
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 2066
+        width: 480
+        height: 432
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14091f8a1ac675f49a3c2addb536cc59
+      internalID: 4466015721226300287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lootKeySheet 1_11
+      rect:
+        serializedVersion: 2
+        x: 1552
+        y: 2066
+        width: 481
+        height: 432
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 179af81a09c79834bb11423b0fd1fdb6
+      internalID: -661380768721856950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lootKeySheet 1_12
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 1553
+        width: 480
+        height: 432
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd1c1471ceaa20046b7ab166ca5a6f46
+      internalID: -736006433066911036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lootKeySheet 1_13
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 1553
+        width: 481
+        height: 432
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14fdab73dde6ac84b8a6341ac41a9ede
+      internalID: -3342786715054422050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lootKeySheet 1_14
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 1553
+        width: 480
+        height: 432
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f209287eb4986f141bfce9d5051c740d
+      internalID: -8136729158058194250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lootKeySheet 1_15
+      rect:
+        serializedVersion: 2
+        x: 1552
+        y: 1553
+        width: 481
+        height: 432
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8dcd0d8cd48e8a34db69c5abda4100e7
+      internalID: -209838889895533997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lootKeySheet 1_16
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 1042
+        width: 481
+        height: 432
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8694365d460bd7f47af491e2e730b410
+      internalID: -893870058611691942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lootKeySheet 1_17
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 1042
+        width: 481
+        height: 432
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37ecdb3c53da1814194f2d18bffd674f
+      internalID: 8250784909177781148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lootKeySheet 1_18
+      rect:
+        serializedVersion: 2
+        x: 1039
+        y: 1042
+        width: 481
+        height: 432
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d55dcc970b5297e44ab8d2396bc64420
+      internalID: -475167979532609797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lootKeySheet 1_19
+      rect:
+        serializedVersion: 2
+        x: 1552
+        y: 1042
+        width: 481
+        height: 432
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 959a7bf842934d8489cca24d1b51e833
+      internalID: -1612862648187518784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lootKeySheet 1_20
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 529
+        width: 480
+        height: 433
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36a2eff111aced446b476fdb50c34d66
+      internalID: -7730720756809565866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lootKeySheet 1_21
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 529
+        width: 481
+        height: 433
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e6280b3ac0b2fe4facfb4b116f310dd
+      internalID: 9059698692131540493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lootKeySheet 1_22
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 529
+        width: 480
+        height: 433
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec05dcda9acbd66429b482e899bf7d97
+      internalID: 4092603194313889383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lootKeySheet 1_23
+      rect:
+        serializedVersion: 2
+        x: 1552
+        y: 529
+        width: 481
+        height: 433
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4764e542990566648ae474558c519169
+      internalID: 7273232688288802227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lootKeySheet 1_24
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 17
+        width: 481
+        height: 434
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8acd81d5e0e2e8b45973a828e50595fe
+      internalID: 719170590758384723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lootKeySheet 1_25
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 17
+        width: 481
+        height: 434
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ecf445608e4de6745a33250fa36f22cc
+      internalID: 8590217450152282416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lootKeySheet 1_26
+      rect:
+        serializedVersion: 2
+        x: 1039
+        y: 17
+        width: 481
+        height: 434
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90c2dc53c64748e4f9b1ccc9e975c219
+      internalID: 8270881831903037732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lootKeySheet 1_27
+      rect:
+        serializedVersion: 2
+        x: 1552
+        y: 17
+        width: 481
+        height: 434
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de1e47a2fa259c8409e99f0ff3dd40ce
+      internalID: 4608070196589003705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: b443cd398a7398a4588edfdc45135af9
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
